@@ -90,7 +90,11 @@ public class OAuthActivity extends Activity implements ChooseAuthenticationFragm
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION) && SdkUtils.isInternetAvailable(context)) {
                 // if we are not showing a web page then redo the authentication.
-                if (!oauthView.getUrl().startsWith("http")){
+                String url = null;
+                if (oauthView != null) {
+                    url = oauthView.getUrl();
+                }
+                if (url == null || !url.startsWith("http")){
                     startOAuth();
                 }
             }
